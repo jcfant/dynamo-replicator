@@ -58,7 +58,7 @@ var replicator = require('dynamo-replicator')({
 	table: 'SLAVE-TABLE'
 });
 
-exports.handle = function(event, context) {
+exports.handler = function(event, context) {
 	replicator.process(event)
 		.then(function() {
 			context.succeed('success');
