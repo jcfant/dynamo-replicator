@@ -48,7 +48,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
     - `dynamodb:GetShardIterator`
     - `dynamodb:DescribeStream`
     - `dynamodb:ListStreams`
-  - For the **slave** tables
+  - For the **slave** table
     - `dynamodb:PutItem`
     - `dynamodb:DeleteItem`
 1. On the **Triggers** tab of your **master** DynamoDB, click **Create Trigger** and **New Function**; for the **Configure event source** options, ensure the **DynamoDB table** is your master table and leave everything else as default and click **Next**; for the **Configure function** options name your function something like `dynamodb-replicator` and for **Code entry type** select **Upload a .ZIP file** and choose the zip file created earlier.
