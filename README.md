@@ -24,7 +24,7 @@ Add a stream to the DynamoDB table you want to use as your master.
 
 Alternatively, if you want to provision your DynamoDB table with CloudFormation add the `StreamSpecification` property to the `AWS::DynamoDB::Table` object, e.g.
 
-```json
+```
 {
   "AWSTemplateFormatVersion": "2010-09-09",
   "Resources": {
