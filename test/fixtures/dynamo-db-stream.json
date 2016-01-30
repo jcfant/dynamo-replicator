@@ -1,0 +1,81 @@
+
+{
+   "Records": [
+      {
+         "eventID": "1",
+         "eventName": "INSERT",
+         "eventVersion": "1.0",
+         "eventSource": "aws:dynamodb",
+         "awsRegion": "eu-west-1",
+         "dynamodb": {
+            "Keys": {
+               "FromURL": {
+                  "S": "www.ft.com/fastft"
+               }
+            },
+            "NewImage": {
+               "Message": {
+                  "S":"www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz"
+               },
+               "FromURL": {
+                  "S":"www.ft.com/fastft"
+               },
+               "Type": {
+                 "N": "100"
+               }
+            },
+            "SequenceNumber":"111",
+            "SizeBytes":26,
+            "StreamViewType":"NEW_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      },
+      {
+         "eventID":"2",
+         "eventName":"MODIFY",
+         "eventVersion":"1.0",
+         "eventSource":"aws:dynamodb",
+         "awsRegion":"eu-west-1",
+         "dynamodb":{
+            "Keys":{
+               "FromURL": {
+                  "S":"www.ft.com/fastft"
+               }
+            },
+            "NewImage":{
+               "Message": {
+                  "S":"www.ft.com/stream/brandId/NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz"
+               },
+               "FromURL": {
+                  "S":"www.ft.com/fastft"
+               },
+               "Type": {
+                 "N": "301"
+               }
+            },
+            "SequenceNumber":"222",
+            "SizeBytes":59,
+            "StreamViewType":"NEW_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      },
+      {
+         "eventID": "3",
+         "eventName": "REMOVE",
+         "eventVersion": "1.0",
+         "eventSource": "aws:dynamodb",
+         "awsRegion": "eu-west-1",
+         "dynamodb":{
+            "Keys":{
+               "FromURL": {
+                  "S":"www.ft.com/fastft"
+               }
+            },
+            "SequenceNumber":"333",
+            "SizeBytes":38,
+            "StreamViewType":"NEW_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      }
+   ]
+}
