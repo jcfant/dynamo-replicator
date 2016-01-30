@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-replicator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "replactor.js",
   "dependencies": {
     "aws-sdk": "^2.2.33",
