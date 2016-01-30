@@ -1,7 +1,7 @@
 {
   "name": "dynamo-replicator",
   "version": "1.0.0",
-  "main": "replactor.js",
+  "main": "replicator.js",
   "dependencies": {
     "aws-sdk": "^2.2.33",
     "denodeify": "^1.2.1",
