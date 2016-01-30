@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.12
+3 info using node@v4.2.6
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/mandrews/sandboxes/dynamodb-replication',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/mandrews/.npm/dynamodb-replicator/1.0.0/package.tgz',
+9 verbose tar pack   '/Users/mandrews/sandboxes/dynamodb-replication' ]
+10 verbose tarball /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package.tgz
+11 verbose folder /Users/mandrews/sandboxes/dynamodb-replication
+12 info prepublish dynamodb-replicator@1.0.0
+13 verbose addLocalTarball adding from inside cache /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package.tgz
+14 silly cache afterAdd dynamodb-replicator@1.0.0
+15 verbose afterAdd /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package/package.json written
+17 silly publish { name: 'dynamodb-replicator',
+17 silly publish   version: '1.0.0',
+17 silly publish   main: 'replactor.js',
+17 silly publish   dependencies:
+17 silly publish    { 'aws-sdk': '^2.2.33',
+17 silly publish      denodeify: '^1.2.1',
+17 silly publish      'es6-promise': '^3.0.2' },
+17 silly publish   readme: '# DynamoDB Replicator\n\nLambda-ready npm package for replicating DynamoDB tables within or between regions.\n\nSupports one-way replication (single master to slave(s))\n\n## Usage\n\n### Prerequisites\n\nYou\'ll need NodeJS and NPM installed on your local machine.\n\n### Prepare your DynamoDB table\n\nAdd a stream to the DynamoDB table you want to use as your master.\n\n1. In the Overview tab of the DynamoDB table in the AWS console click **Manage Stream**.\n1. In the overlay that pops up choose **New Image** (although **New and old images** should also work).\n1. Click **Enable**.\n\nAlternatively, if you want to provision your DynamoDB table with CloudFormation add the `StreamSpecification` property to the `AWS::DynamoDB::Table` object, e.g.\n\n```\n{\n  "AWSTemplateFormatVersion": "2010-09-09",\n  "Resources": {\n    "myTable": {\n      "TableName": "mytable",\n      "StreamSpecification": {\n        "StreamViewType": "NEW_IMAGE"\n      }\n    }\n  }\n}\n```\n\n### Create the replication Lambda function\n\n1. Create a new empty directory on your computer\n1. Within that folder create two files, one called `package.json` and another called `index.js`.\n1. Edit `package.json` and save `{}` as the contents of that file.\n1. In your terminal type `npm install --save dynamo-replicator es6-promise`\n1. Edit `index.js` and save the contents of the file shown below (changing `SLAVE-REGION` and `SLAVE-TABLE` to be the region and table name of the DynamoDB to be replicated to).\n1. zip the contents of the folder up.\n1. Create a new Lambda function with a role that has sufficient IAM permissions (as a minimum it needs `dynamodb::PutItem` and `dynamodb::DeleteItem` on the **slave** table.\n1. On the **Triggers** tab of your **master** DynamoDB, click **Create Trigger** and **New Function**; for the **Configure event source** options, leave everything as default and click **Next**; for the **Configure function** options name your function something like `dynamodb-replicator` and for **Code entry type** select **Upload a .ZIP file** and choose the zip file created earlier.\n1. Repeat the previous step for multiple slaves changing `SLAVE-REGION` and `SLAVE-TABLE` in `index.js` each time and re-zipping for each slave.\n1. Test by creating and deleting items from the **master** table and ensuring that the slaves update accordingly.\n\n**Contents of `index.json`**:\n```\n\'use strict\';\n\nrequire(\'es6-promise\').polyfill();\n\nvar replicator = require(\'./lib/replicator\')({\n\tregion: \'SLAVE-REGION\',\n\ttable: \'SLAVE-TABLE\'\n});\n\nexports.handle = function(event, context) {\n\treplicator.process(event)\n\t\t.then(function() {\n\t\t\tcontext.succeed(\'success\');\n\t\t})\n\t\t.catch(function(err) {\n\t\t\tcontext.fail(err);\n\t\t});\n};\n```\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '5ced0eab57532a9c66248a0c929df49e7fe735bd',
+17 silly publish   description: 'Lambda-ready npm package for replicating DynamoDB tables within or between regions.',
+17 silly publish   _id: 'dynamodb-replicator@1.0.0',
+17 silly publish   scripts: {},
+17 silly publish   _shasum: 'a37523f8134e5d7ef008a39d4c8c8d337f127fe4',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name dynamodb-replicator
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/dynamodb-replicator
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/mandrews/.npm/dynamodb-replicator/1.0.0/package.tgz
+25 verbose request uri https://registry.npmjs.org/dynamodb-replicator
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 10:53:22 AM
+28 verbose request using bearer token for auth
+29 verbose request id 4a3cbeb60b75c6c9
+30 http request PUT https://registry.npmjs.org/dynamodb-replicator
+31 http 403 https://registry.npmjs.org/dynamodb-replicator
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   'content-length': '111',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Sat, 30 Jan 2016 10:53:22 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-lcy1126-LCY',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1454151201.323488,VS0,VE969' }
+33 verbose request invalidating /Users/mandrews/.npm/registry.npmjs.org/dynamodb-replicator on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: You do not have permission to publish 'dynamodb-replicator'. Are you logged in as the correct user? : dynamodb-replicator
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1082:10)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid dynamodb-replicator
+38 verbose cwd /Users/mandrews/sandboxes/dynamodb-replication
+39 error Darwin 15.3.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.2.6
+42 error npm  v2.14.12
+43 error code E403
+44 error You do not have permission to publish 'dynamodb-replicator'. Are you logged in as the correct user? : dynamodb-replicator
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]

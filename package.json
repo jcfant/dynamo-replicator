@@ -1,5 +1,5 @@
 {
-  "name": "dynamodb-replicator",
+  "name": "dynamo-replicator",
   "version": "1.0.0",
   "main": "replactor.js",
   "dependencies": {

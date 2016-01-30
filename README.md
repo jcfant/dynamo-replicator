@@ -53,7 +53,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
 
 require('es6-promise').polyfill();
 
-var replicator = require('./lib/replicator')({
+var replicator = require('dynamo-replicator')({
 	region: 'SLAVE-REGION',
 	table: 'SLAVE-TABLE'
 });
