@@ -10,6 +10,10 @@ Supports one-way replication (single master to one or many slave(s)).
 
 You'll need NodeJS and NPM installed on your local machine.
 
+### Limitations
+
+Your **master** DynamoDB table **must** be in a region that supports AWS Lambda.  The slaves can be in any region.
+
 ### Prepare your DynamoDB table
 
 Add a stream to the DynamoDB table you want to use as your master.
