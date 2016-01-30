@@ -30,6 +30,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
   "Resources": {
     "myTable": {
       "TableName": "mytable",
+      [..],
       "StreamSpecification": {
         "StreamViewType": "NEW_IMAGE"
       }
