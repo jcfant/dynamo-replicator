@@ -2,7 +2,7 @@
 
 Lambda-ready npm package for replicating DynamoDB tables within or between regions.
 
-Supports one-way replication (single master to slave(s))
+Supports one-way replication (single master to one or many slave(s))
 
 ## Usage
 
