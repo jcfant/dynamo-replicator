@@ -1,6 +1,6 @@
 {
   "name": "dynamo-replicator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "replicator.js",
   "dependencies": {
     "aws-sdk": "^2.2.33",
