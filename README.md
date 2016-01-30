@@ -15,7 +15,7 @@ You'll need NodeJS and NPM installed on your local machine.
 Add a stream to the DynamoDB table you want to use as your master.
 
 1. In the Overview tab of the DynamoDB table in the AWS console click **Manage Stream**.
-1. In the overlay that pops up choose **New Image** (although **New and old images** should also work).
+1. In the overlay that pops up choose **New Image** (although **New and old images** should also work should you need that for other reasons).
 1. Click **Enable**.
 
 Alternatively, if you want to provision your DynamoDB table with CloudFormation add the `StreamSpecification` property to the `AWS::DynamoDB::Table` object, e.g.
