@@ -43,7 +43,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
 1. Edit `index.js` and save the contents of the file shown below (changing `SLAVE-REGION` and `SLAVE-TABLE` to be the region and table name of the DynamoDB to be replicated to).
 1. zip the contents of the folder up.
 1. Create a new Lambda function with a role that has sufficient IAM permissions (as a minimum it needs `dynamodb::PutItem` and `dynamodb::DeleteItem` on the **slave** table.
-1. On the **Triggers** tab of your **master** DynamoDB, click **Create Trigger** and **New Function**; for the **Configure event source** options, leave everything as default and click **Next**; for the **Configure function** options name your function something like `dynamodb-replicator` and for **Code entry type** select **Upload a .ZIP file** and choose the zip file created earlier.
+1. On the **Triggers** tab of your **master** DynamoDB, click **Create Trigger** and **New Function**; for the **Configure event source** options, ensure the **DynamoDB table** is your master table and leave everything else as default and click **Next**; for the **Configure function** options name your function something like `dynamodb-replicator` and for **Code entry type** select **Upload a .ZIP file** and choose the zip file created earlier.
 1. Repeat the previous step for multiple slaves changing `SLAVE-REGION` and `SLAVE-TABLE` in `index.js` each time and re-zipping for each slave.
 1. Test by creating and deleting items from the **master** table and ensuring that the slaves update accordingly.
 

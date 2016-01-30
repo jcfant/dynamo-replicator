@@ -4,8 +4,7 @@
   "main": "replicator.js",
   "dependencies": {
     "aws-sdk": "^2.2.33",
-    "denodeify": "^1.2.1",
-    "es6-promise": "^3.0.2"
+    "denodeify": "^1.2.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
