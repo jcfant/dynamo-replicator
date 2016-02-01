@@ -63,6 +63,8 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
 1. Repeat the previous step for multiple slaves changing `SLAVE-REGION` and `SLAVE-TABLE` in `index.js` each time and re-zipping for each slave.
 1. Test by creating and deleting items from the **master** table and ensuring that the slaves update accordingly.
 
+### Appendix
+
 **Contents of `index.json`**:-
 ```js
 'use strict';
