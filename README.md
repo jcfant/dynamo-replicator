@@ -58,6 +58,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
   - For the **slave** table
     - `dynamodb:PutItem`
     - `dynamodb:DeleteItem`
+  - You might like to use the inline policy for the role below.
 1. On the **Triggers** tab of your **master** DynamoDB, click **Create Trigger** and **New Function**; for the **Configure event source** options, ensure the **DynamoDB table** is your master table and leave everything else as default and click **Next**; for the **Configure function** options name your function something like `dynamodb-replicator` and for **Code entry type** select **Upload a .ZIP file** and choose the zip file created earlier.
 1. Repeat the previous step for multiple slaves changing `SLAVE-REGION` and `SLAVE-TABLE` in `index.js` each time and re-zipping for each slave.
 1. Test by creating and deleting items from the **master** table and ensuring that the slaves update accordingly.
@@ -82,4 +83,69 @@ exports.handler = function(event, context) {
 			context.fail(err);
 		});
 };
+```
+
+**Lambda function Role inline policy**:-
+
+Inline Policy:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction"
+            ],
+            "Resource": "arn:aws:lambda:*:*:function:LAMBDA-FUNCTION-NAME"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:DeleteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/SLAVE-TABLE"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:DescribeStream",
+                "dynamodb:ListStreams"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/MASTER-TABLE"
+        }
+    ]
+}
+```
+Remember to replace `LAMBDA-FUNCTION-NAME` with the name of the Lambda function name, `SLAVE-TABLE` with the name of the slave DynamoDB table and `MASTER-TABLE` with the name of the master DynamoDB table.  Or all with `*`'s if you're feeling lucky.
+
+
+Trust relationship:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
 ```
