@@ -126,12 +126,12 @@ Inline Policy:
                 "dynamodb:DescribeStream",
                 "dynamodb:ListStreams"
             ],
-            "Resource": "arn:aws:dynamodb:*:*:table/MASTER-TABLE"
+            "Resource": "arn:aws:dynamodb:*:*:table/MASTER-TABLE*"
         }
     ]
 }
 ```
-Remember to replace `LAMBDA-FUNCTION-NAME` with the name of the Lambda function name, `SLAVE-TABLE` with the name of the slave DynamoDB table and `MASTER-TABLE` with the name of the master DynamoDB table.  Or all with `*`'s if you're feeling lucky.
+Remember to replace `LAMBDA-FUNCTION-NAME` with the name of the Lambda function name, `SLAVE-TABLE` with the name of the slave DynamoDB table and `MASTER-TABLE` with the name of the master DynamoDB table.  Or all with `*`'s if you're feeling lucky.  Remember to include an `*` after the master table name, e.g. `arn:aws:dynamodb:*:*:table/MasterTable*` so that the role gets access to the update stream associated with the table as well as the table itself.
 
 
 Trust relationship:
