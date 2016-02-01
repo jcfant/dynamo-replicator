@@ -48,7 +48,7 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
 1. In your terminal run `npm install --save dynamo-replicator es6-promise`
 1. Edit `index.js` and save the contents of the file shown below (changing `SLAVE-REGION` and `SLAVE-TABLE` to be the region and table name of the DynamoDB to be replicated to).
 1. zip the contents of the folder up.  (Remember to zip the contents of the folder, not the folder itself)
-  - In the terminal you could achieve this by runnning `find . -exec zip ../replication-lambda-function.zip {} +` within the same directory.
+  - You could achieve this by runnning `find . -exec zip ../replication-lambda-function.zip {} +` from within the same directory.
 1. Create a new Lambda function with a role that has sufficient IAM permissions.  As a minimum it needs:-
   - For the **master** table and its **stream**:
     - `dynamodb:GetRecords`
