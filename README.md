@@ -50,12 +50,12 @@ Alternatively, if you want to provision your DynamoDB table with CloudFormation 
 1. zip the contents of the folder up.  (Remember to zip the contents of the folder, not the folder itself)
   - In the terminal you could achieve this by runnning `find . -exec zip ../replication-lambda-function.zip {} +` within the same directory.
 1. Create a new Lambda function with a role that has sufficient IAM permissions.  As a minimum it needs:-
-  - For the **master** table and its **stream**.
+  - For the **master** table and its **stream**:
     - `dynamodb:GetRecords`
     - `dynamodb:GetShardIterator`
     - `dynamodb:DescribeStream`
     - `dynamodb:ListStreams`
-  - For the **slave** table
+  - For the **slave** table:
     - `dynamodb:PutItem`
     - `dynamodb:DeleteItem`
   - You might like to use the inline policy for the role below.
