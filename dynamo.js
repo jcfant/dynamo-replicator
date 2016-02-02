@@ -38,4 +38,3 @@ function del(region, table, keys) {
 			console.log({ event: "OBJECT_DELETED", keys: JSON.stringify(keys) });
 		});
 }
-
